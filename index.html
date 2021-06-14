@@ -61,6 +61,7 @@
           id="messageinput"
           placeholder="Input message here!"
         />
+         <input type="text" id="ynameinput" placeholder="Enter Your name here!" />
         <input class="btn" type="button" value="Get url" onclick="getUrl();" />
         <p id="cipheroutput"></p>
         <input
@@ -77,10 +78,12 @@
       const getUrl = () => {
         const name = document.querySelector("#nameinput").value;
         const message = document.querySelector("#messageinput").value;
+        const yname = document.querySelector("#ynameinput").value;
         const cipherName = rot13(name);
         const cipherMessage = rot13(message);
+        const cipheryName = rot13(yname);
 
-        birthdayUrl =`https://hbdy.github.io/index.1.html?nm=${cipherName}&msg=${cipherMessage}`;
+        birthdayUrl =`https://hbdy.github.io/index.1.html?nm=${cipherName}&msg=${cipherMessage}&ynm=${cipheryName}`;
 
         document.querySelector("#cipheroutput").textContent = birthdayUrl;
         document.querySelector("#preview").href = birthdayUrl;
