@@ -18,8 +18,9 @@
   <h1>Happy Birthday! <em id ="friendName"></em></h1>
   </br>
   <p><em id="message">God always blesses genuine, humble and kind people like you. And today, you’re likely to get double the blessings since it’s your Birthday! May all your birthday wishes come true!!</em></p>
-  
+<h2><em id ="yfriendName">From @</em></h2>
 <canvas id="birthday"></canvas>
+  
   
     <script>
         //get name from url
@@ -48,6 +49,19 @@
           str = rot13(str) + str2;
           return str
       }
+
+       function getParameterByyName(yname, url) {
+          if (!url) url = window.location.href;
+          yname = yname.replace(/[\[\]]/g, '\\$&');
+          var regex = new RegExp('[?&]' + yname + '(=([^&#]*)|&|#|$)'),
+              results = regex.exec(url);
+          if (!results) return "";
+          if (!results[2]) return '';
+          var str = decodeURIComponent(results[2].replace(/\+/g, ' '));
+          return rot13(str);
+      }
+
+
       function rot13(str) {
         var input     = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         var output    = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
@@ -59,20 +73,18 @@
       
       var name = getParameterByName('nm');
       var message = getParameterByMessage('msg');
+      var yname = getParameterByyName('ynm');
 
       var nameElem = document.getElementById("friendName");
       var messageElem = document.getElementById("message");
+       var ynameElem = document.getElementById("yfriendName");
 
       nameElem.innerHTML = name;
+       ynameElem.innerHTML = yname;
       messageElem.innerHTML = message;
+      
     </script>
     <script  src="js/main.js"></script>
-
-  
-  
-  
-  
-  
 
 </body>
 
