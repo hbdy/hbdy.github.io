@@ -1,0 +1,130 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Happy Birthday</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      html {
+        font-size: 10px;
+        background: url(img/image.jpg) bottom center;
+        background-size: cover;
+      }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+      .container {
+        display: flex;
+        flex: 1;
+        min-height: 65vh;
+        align-items: center;
+        justify-content: center;
+      }
+      .left {
+        border: 0.4rem solid black;
+        border-radius: 0.5rem;
+        margin: 1rem;
+        font-size: 2.5rem;
+        padding: 1rem 0.5rem;
+        transition: all 0.07s ease;
+        width: 40%;
+
+        text-align: center;
+        color: white;
+        background: rgba(0, 0, 0, 0.4);
+        text-shadow: 0 0 0.5rem black;
+      }
+
+      input {
+        width: 100%;
+        min-height: 5%;
+      }
+      .btn {
+        background-color: royalblue;
+        color: azure;
+      }
+    </style>
+  </head>
+  <body>
+        <iframe src="https://hbdy.github.io/happybirthday.html" width="35%" height="30%" scrolling="no">
+            <p>Iframe to display fireworks animation page</p>
+        </iframe>
+    <div class="container">
+      <div class="left">
+        <input type="text" id="nameinput" placeholder="Enter name here!" />
+        <input
+          type="text"
+          id="messageinput"
+          placeholder="Input message here!"
+        />
+        <input class="btn" type="button" value="Get url" onclick="getUrl();" />
+        <p id="cipheroutput"></p>
+        <input
+          class="btn"
+          type="button"
+          value="Copy url"
+          onclick="copyfunction();"
+        />
+        <a href="" id="preview" style="color: aliceblue;">Preview</a>
+      </div>
+    </div>
+
+    <script>
+      const getUrl = () => {
+        const name = document.querySelector("#nameinput").value;
+        const message = document.querySelector("#messageinput").value;
+        const cipherName = rot13(name);
+        const cipherMessage = rot13(message);
+
+        birthdayUrl =`https://hbdy.github.io/index.1.html?nm=${cipherName}&msg=${cipherMessage}`;
+
+        document.querySelector("#cipheroutput").textContent = birthdayUrl;
+        document.querySelector("#preview").href = birthdayUrl;
+      }
+      const rot13 = str => {
+        var input = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";
+        var output = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm+";
+        var index = x => input.indexOf(x);
+        var translate = x => (index(x) > -1 ? output[index(x)] : x);
+        str = str
+          .split("")
+          .map(translate)
+          .join("");
+        return str;
+      }
+
+      const copyfunction = () => {
+        copyText = document.getElementById("cipheroutput").innerText;
+        copyToClipboard(copyText);
+      }
+
+      const copyToClipboard = str => {
+        if (str.length < 1) {
+          alert("No text copied");
+          return null;
+        }
+        const el = document.createElement("textarea");
+        el.value = str;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+        alert(" Text copied ");
+      };
+
+      // function derot13() {
+      //     str = document.getElementById("decipherinput").value;
+      //     var output   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      //     var input    = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+      //     var index     = x => input.indexOf(x);
+      //     var translate = x => index(x) > -1 ? output[index(x)] : x;
+      //     str = str.split('').map(translate).join('');
+      //     document.getElementById("decipheroutput").innerText = str;
+      //     }
+    </script>
+  </body>
+</html>
